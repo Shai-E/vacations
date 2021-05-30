@@ -17,18 +17,14 @@ const Reports = () => {
     const [isLoading, setIsLoading] = useState(true);
     const history = useHistory();
 
-    const routeChange = (path: string) => {
-        history.push(path);
-    };
-
     const vacations = useSelector((state: RootState) => state.vacations.vacations);
     const user:UserModel = useSelector((state: RootState) => state.user);
 
     useEffect(()=>{
         if(!user.isAdmin){
-            routeChange("/page-404");
+            history.push("/page-404");
         }
-    },[user.isAdmin]);
+    },[user.isAdmin, history]);
 
     useEffect(() => {
         const followedVacationsData = vacations

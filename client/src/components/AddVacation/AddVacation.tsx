@@ -49,9 +49,9 @@ function AddVacation() {
 
     useEffect(()=>{
         if(!user.isAdmin){
-            routeChange("/page-404");
+            history.push("/page-404");
         }
-    },[user.isAdmin]);
+    },[user.isAdmin, history]);
 
     useEffect(() => {
         if (document.querySelector(`#new-picture-input`)) {
