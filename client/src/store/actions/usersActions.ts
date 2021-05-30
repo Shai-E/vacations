@@ -39,6 +39,8 @@ export const loginUser = (data: UserModel) => async (dispatch: AppDispatch) => {
 
 export const logoutUser = (data: string) => async (dispatch: AppDispatch) => {
     localStorage.removeItem("user");
+    localStorage.removeItem("dark");
+    document.body.className = "";
     setAccessToken("");
     dispatch(logout());
     await axios.post(`${requestPath}/logout`, data, { withCredentials: true });

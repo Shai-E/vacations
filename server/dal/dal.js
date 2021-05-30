@@ -1,11 +1,12 @@
+require("dotenv").config();
 const mysql = require("mysql2");
 
-const db = 'vacations';
+const db = process.env.SQL_DB;
 
 const options = {
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
+    host: process.env.SQL_HOST,
+    user: process.env.SQL_USER,
+    password: process.env.SQL_PWD,
     database: db
 }
 
@@ -16,7 +17,7 @@ connection.connect(err=>{
         console.log(err);
         return;
     }
-    console.log("We're connected to "+db+" on MySQL");
+    console.log(`We're connected to ${db} on MySQL`);
 });
 
 const execute = (sql) => {

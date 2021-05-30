@@ -1,7 +1,7 @@
 
-CREATE DATABASE vacations;
+CREATE DATABASE vacations_db_se;
 
-USE vacations;
+USE vacations_db_se;
 
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,

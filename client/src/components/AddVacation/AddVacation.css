@@ -66,7 +66,7 @@
     border: 1px solid #64646481;
     cursor: default;
 }
-.dark h1 {
+.dark .AddVacation > h1 {
     color:#add8e6;
 }
 .dark .new-submit-btn:hover {
