@@ -1,0 +1,130 @@
+.NavBar {
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #252525;
+    color: #fff;
+    height: 82px;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+}
+
+.NavBar {
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+}
+
+.NavBar a {
+    color: #329bb1;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    margin: auto 10px auto 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.NavBar a:hover {
+    color: #222;
+    background-color: #329bb1;
+}
+
+.greeting {
+    align-self: center;
+    font-size: xx-large;
+}
+
+.greeting h3 {
+    margin: 0;
+}
+
+.linkIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 
+-------
+*/
+
+.dark-toggle {
+    display: none;
+}
+
+.dark-label {
+    cursor: pointer;
+    width: 90px;
+    height: 45px;
+    background: #444444;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 100px;
+    position: relative;
+    align-self: center;
+    margin-right: 10px;
+}
+
+.dark-label:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 35px;
+    height: 35px;
+    background: #fff;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.dark-toggle:checked ~ .dark-label {
+    background: #329bb1;
+}
+
+.dark-toggle:checked ~ .dark-label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+.dark-label:active:after {
+    width: 80px;
+}
+
+@media only screen and (max-width: 1100px) {
+    .greeting {
+        font-size: large;
+    }
+}
+
+@media only screen and (max-width: 948px) {
+    .greeting {
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+
+    .NavBar {
+        height: auto;
+        position: static;
+        flex-direction: column-reverse;
+    }
+    .links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 5px;
+    }
+    .dark-label {
+        margin: 5px;
+        margin-right: 0px;
+    }
+    .vacations-link {
+        border-top: 1px solid white;
+    }
+}

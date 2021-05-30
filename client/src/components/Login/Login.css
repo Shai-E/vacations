@@ -1,0 +1,14 @@
+.login-details{
+    position: fixed;
+    top: 100%;
+    transform: translateY(-100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+@media only screen and (max-width: 425px){
+    .login-details{
+        transform: translateY(0%);
+    }
+}

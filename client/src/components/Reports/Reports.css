@@ -1,0 +1,25 @@
+.Reports {
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+    width: 80vw;
+    padding: 10px 5px 40px 5px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.Reports > canvas {
+    height: 550px;
+}
+@media only screen and (max-width: 948px) {
+    .Reports {
+        position: static;
+        transform: none;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .Reports > canvas {
+        height: 500px;
+    }
+}

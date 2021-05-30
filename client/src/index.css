@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+@import url("https://fonts.googleapis.com/css?family=Caveat");
+@import url("https://fonts.googleapis.com/css2?family=Adamina&display=swap");
+
+body {
+    margin: 0;
+    background-image: url("./assets/images/coloredBG.jpg");
+    background-attachment: fixed;
+}
+
+.dark {
+    background-image: url("./assets/images/darkBG.jpg");
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+* {
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
+}
+
+.dark::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+
+.dark::-webkit-scrollbar-track {
+    background: linear-gradient(90deg, #434343, #000 1px, #000 0, #000);
+}
+
+.dark::-webkit-scrollbar-thumb {
+    background: #434343;
+    border-radius: 16px;
+    box-shadow: inset 2px 2px 2px hsl(0deg 0% 100% / 25%), inset -2px -2px 2px rgb(0 0 0 / 25%);
+}

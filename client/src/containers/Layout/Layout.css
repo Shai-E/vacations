@@ -1,0 +1,12 @@
+main {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+@media only screen and (max-width: 948px) {
+    main {
+        padding-top: 0px;
+    }
+}

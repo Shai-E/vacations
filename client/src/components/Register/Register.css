@@ -1,0 +1,11 @@
+.errors{
+    position: fixed;
+    top: 100%;
+    transform: translateX(-25%);
+    display: flex;
+    align-items: flex-start;
+    width: 200%;
+    text-align: start;
+    background-color: rgba(220, 20, 60, 0.829);
+    color: #fff;
+}

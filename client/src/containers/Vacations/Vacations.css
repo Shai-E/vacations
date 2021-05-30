@@ -1,0 +1,7 @@
+.Vacations {
+    max-width: 1450px;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

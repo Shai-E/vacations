@@ -1,0 +1,349 @@
+.Vacation {
+    display: flex;
+    height: 350px;
+    width: 700px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.dark .Vacation {
+    border: 1px solid #fff;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+} 
+
+.Vacation:hover {
+    box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.3);
+}
+
+.Vacation:before {
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.dark .Vacation:before {
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+}
+
+.vacation-text {
+    color: #6f7886;
+    position: relative;
+    z-index: 2;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    margin-left: 30px;
+    width: 100%;
+}
+
+.dark .vacation-text {
+    color: #000;
+}
+
+.card-dates {
+    color: #6893da;
+    font-size: small;
+}
+
+.card-destination {
+    color: #000000;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+
+.card-price {
+    color: #6893da;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.dark .card-price, .dark .card-dates{
+    color: #add8e6;
+}
+
+.card-followers {
+    z-index: 2;
+    position: relative;
+}
+.card-description {
+    padding-right: 40px;
+}
+
+.followers-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inner-container-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.inner-container-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.inner-container-image > img {
+    height: 100%;
+    width: 400px;
+    object-fit: cover;
+    object-position: left;
+    z-index: 2;
+}
+
+.picture-input-container > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: left;
+    z-index: 2;
+}
+
+.follow-input,
+.edit-input {
+    display: none;
+}
+
+.follow-btn,
+.edit-btn, .delete-btn, .reset-btn {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    padding: 10px;
+    font-size: small;
+}
+
+.follow-input ~ .follow-btn:before {
+    content: "Follow";
+}
+
+.follow-input:checked ~ .follow-btn:before {
+    content: "Unfollow";
+}
+
+.follow-input ~ .follow-btn {
+    color: #6f7886;
+    background-color: #6894da50;
+}
+
+.follow-input ~ .follow-btn:hover {
+    color: #ffffff;
+    background-color: #6893da;
+}
+
+.follow-input:checked ~ .follow-btn {
+    color: #6f7886;
+    background-color: #c7e76e63;
+}
+
+.dark .follow-input:checked ~ .follow-btn {
+    color: #000000;
+    background-color: #e2e6ad00;
+    border: 1px solid black
+}
+
+.follow-input:checked ~ .follow-btn:hover {
+    color: #ffffff;
+    background-color: #da6c68d7;
+    border: 1px solid rgba(0, 0, 0, 0)
+}
+
+.edit-input ~ .edit-btn:before {
+    content: "EDIT ✎";
+}
+
+.edit-input:checked ~ .edit-btn:before {
+    content: "SAVE ✔";
+    /* outline: 1px solid black; */
+}
+
+.edit-input ~ .edit-btn {
+    color: #6f7886;
+    background-color: #6894da50;
+}
+
+.edit-input ~ .delete-btn {
+    color: #6f7886;
+    background-color: #6894da50;
+}
+
+.edit-input ~ .delete-btn:hover {
+    color: #ffffff;
+    background-color: #da6c68d7;
+}
+
+.edit-input ~ .reset-btn {
+    color: #6f7886;
+    background-color: #6894da50;
+    outline: none;
+    border: none;
+}
+
+.edit-input ~ .reset-btn:hover {
+    color: #000;
+    background-color: #dad868d7;
+}
+
+.edit-input ~ .edit-btn:hover {
+    color: #ffffff;
+    background-color: #6893da;
+}
+
+/* .edit-input:checked ~ .edit-btn {
+    color: #6f7886;
+    background-color: #6894da50;
+} */
+
+.edit-input:checked ~ .edit-btn:hover {
+    color: #000;
+    background-color: #7bda68d7;
+}
+
+.picture-input-container {
+    z-index: 2;
+    width: 400px;
+    padding: 10px;
+    background-color: #6893da;
+}
+
+.picture-input-label {
+    border: 1px black dashed;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.picture-input-label:hover{
+    background-color: #ffffffc7;
+}
+
+.ThumbUpIcon {
+    height: 12px;
+}
+
+.picture-input-container > * {
+    cursor: pointer;
+}
+
+.picture-input {
+    display: none;
+}
+
+.date-input-edit {
+    background: none;
+    background-color: none;
+    outline: none;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.text-input-edit {
+    background: none;
+    background-color: none;
+    outline: none;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+}
+
+.edit-inputs {
+    display: flex;
+    flex-direction: column;
+}
+.edit-inputs,
+.edit-inputs > * {
+    z-index: 2;
+    padding: 4px;
+}
+
+.edit-inputs > textarea {
+    resize: none;
+}
+
+.edit-inputs > label {
+    align-self: flex-start;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.edit-inputs > input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.submit-btn {
+    display: none;
+}
+
+.form-edit {
+    height: inherit;
+    width: inherit;
+    display: flex;
+}
+
+.submit-picture-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 5px;
+    width: 100%;
+    border: 1px black dashed;
+    background-color: #ffffff5e;
+}
+
+.submit-picture-btn:hover {
+    background-color: #ffffffc7;
+}
+
+.dark .follow-btn,
+.dark .edit-btn, .dark .delete-btn, .dark .reset-btn {
+    color:#000000;
+    background-color: #add8e6;
+}
+
+
+@media only screen and (max-width: 700px) {
+    .Vacation {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+    }
+
+    .inner-container-image > img {
+        height: auto;
+        width: 100%;
+    }
+
+    .inner-container-details{
+        min-height: 300px;
+    }
+}
