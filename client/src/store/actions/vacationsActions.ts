@@ -78,6 +78,7 @@ export const updatePictureForVacation = (data: File, id: number) => async (dispa
         });
         dispatch(displayMsg(response.data.message));
         removeMessage(dispatch);
+        // dispatch(setCurrVacationId(0));
 
         const vacations = formatVacationsData(response.data);
         localStorage.setItem("vacations", JSON.stringify(vacations));

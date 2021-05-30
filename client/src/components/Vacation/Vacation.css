@@ -338,6 +338,12 @@ input::-webkit-inner-spin-button {
         width: 100%;
     }
 
+    .picture-input-container{
+        padding-right: 30px;
+        padding-left: 30px;
+        width: 100%;
+    }
+
     .inner-container-image > img {
         height: auto;
         width: 100%;
@@ -345,5 +351,6 @@ input::-webkit-inner-spin-button {
 
     .inner-container-details{
         min-height: 300px;
+        padding: 20px;
     }
 }

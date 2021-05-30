@@ -6,6 +6,8 @@ import Loader from "../Loader/Loader";
 import moment from "moment";
 import { VacationModel } from "../../models/VacationModel";
 import { RootState } from "../../store/store";
+import { UserModel } from "../../models/UserModel";
+import { useHistory } from "react-router-dom";
 
 const Reports = () => {
     const [data, setData] = useState([]);
@@ -13,8 +15,20 @@ const Reports = () => {
     const [options, setOptions] = useState({});
     const [chartData, setChartData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const history = useHistory();
+
+    const routeChange = (path: string) => {
+        history.push(path);
+    };
 
     const vacations = useSelector((state: RootState) => state.vacations.vacations);
+    const user:UserModel = useSelector((state: RootState) => state.user);
+
+    useEffect(()=>{
+        if(!user.isAdmin){
+            routeChange("/page-404");
+        }
+    },[user.isAdmin]);
 
     useEffect(() => {
         const followedVacationsData = vacations

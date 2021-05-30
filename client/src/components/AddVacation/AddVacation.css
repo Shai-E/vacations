@@ -1,10 +1,11 @@
 .new-vacation-form-container {
     display: flex;
+    width: 400px;
     flex-direction: column;
     font-family: inherit;
     background-color: #ffffffce;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 10px 0px 0px 10px;
     font-size: larger;
 }
 .new-vacation-form-container label {
@@ -66,13 +67,23 @@
     border: 1px solid #64646481;
     cursor: default;
 }
-.dark .AddVacation > h1 {
+.dark .new-vacation-form > h1 {
     color:#add8e6;
 }
 .dark .new-submit-btn:hover {
     background-color: #add8e6;
     border: 1px solid #0a417481;
 
+}
+.flexify {
+    display: flex;
+}
+
+.flexify > img {
+    width: 300px;
+    object-fit: contain;
+    background-color: #ffffffce;
+    border-radius: 0px 10px 10px 0px;
 }
 
 
@@ -91,5 +102,21 @@
 @media only screen and (max-width: 700px) {
     .new-vacation-form {
         width: 100%;
+    }
+
+    .new-vacation-form-container {
+        width: 100%;
+    border-radius: 10px 10px 0px 0px;
+    }
+
+    .flexify {
+        display: flex;
+        flex-direction: column;
+    }
+    .flexify > img {
+        width: 100%;
+        object-fit: contain;
+    border-radius: 0px 0px 10px 10px;
+
     }
 }
