@@ -15,6 +15,7 @@ Also, you can see a report of all of the followed vacations ([chart.js]).
 ## Access - user
 
 To sign in as a user - username: user1, password: 1234 | username: user2, password: 1234
+
 You can also sign up as a new user with a unique username and a strong password.
 
 As a user you can follow and unfollow vacations you like. the vacations you like will appear first.
