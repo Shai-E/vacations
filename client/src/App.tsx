@@ -42,7 +42,7 @@ function App() {
     //
 
     return (
-        <div className="App">
+        <div className="App noselect">
             {user.isLoggedIn ? <Layout dark={{isDarkMode, setIsDarkMode}} /> : <GuestMenu />}
             {message ? <span className="site-message">{message}</span> : null}
         </div>
