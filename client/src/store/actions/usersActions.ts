@@ -20,7 +20,7 @@ export const updateToken = async () => {
 
 const setUserForLogin = (user: UserModel) => {
     user.isLoggedIn = true;
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("userInfo", JSON.stringify(user));
     setAccessToken(user.accessToken!);
     axios.defaults.headers.common["Authorization"] = `Bearer ${user.accessToken}`;
     return user;
@@ -38,7 +38,7 @@ export const loginUser = (data: UserModel) => async (dispatch: AppDispatch) => {
 };
 
 export const logoutUser = (data: string) => async (dispatch: AppDispatch) => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("userInfo");
     localStorage.removeItem("dark");
     document.body.className = "";
     setAccessToken("");

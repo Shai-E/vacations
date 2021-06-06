@@ -1,5 +1,5 @@
 const getUserFromStorage = () => {
-    return JSON.parse(localStorage.getItem("user")!);
+    return JSON.parse(localStorage.getItem("userInfo")!);
 };
 const initState = getUserFromStorage() || {};
 

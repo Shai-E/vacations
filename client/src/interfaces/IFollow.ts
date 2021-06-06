@@ -1,4 +1,4 @@
 export interface IFollow {
-    userId: number;
-    vacationId: number;
+    userId?: number;
+    vacationId?: number;
 }
