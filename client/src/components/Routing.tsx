@@ -4,7 +4,7 @@ import Page404 from "./Page404/Page404";
 import AddVacation from "./AddVacation/AddVacation";
 import Reports from "./Reports/Reports";
 
-function Routing() {
+const Routing = ():JSX.Element => {
     return (
         <>
             <Switch>

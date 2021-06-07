@@ -7,7 +7,7 @@ import { AppDispatch } from "../store";
 import { removeMessage } from "./messagesActions";
 const requestPath = "http://localhost:5000/api/users";
 
-export const updateToken = async () => {
+export const updateToken = async ():Promise<void> => {
     try {
         const response = await axios.get(`${requestPath}/token`, { withCredentials: true });
         const token = response.data.accessToken;
@@ -18,7 +18,7 @@ export const updateToken = async () => {
     }
 };
 
-const setUserForLogin = (user: UserModel) => {
+const setUserForLogin = (user: UserModel):UserModel => {
     user.isLoggedIn = true;
     localStorage.setItem("userInfo", JSON.stringify(user));
     setAccessToken(user.accessToken!);
@@ -26,7 +26,7 @@ const setUserForLogin = (user: UserModel) => {
     return user;
 };
 
-export const loginUser = (data: UserModel) => async (dispatch: AppDispatch) => {
+export const loginUser = (data: UserModel) => async (dispatch: AppDispatch):Promise<void> => {
     try {
         const response = await axios.post(`${requestPath}/login`, data, { withCredentials: true });
         const user = setUserForLogin(response.data);
@@ -37,7 +37,7 @@ export const loginUser = (data: UserModel) => async (dispatch: AppDispatch) => {
     }
 };
 
-export const logoutUser = (data: string) => async (dispatch: AppDispatch) => {
+export const logoutUser = (data: string) => async (dispatch: AppDispatch):Promise<void> => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("dark");
     document.body.className = "";
@@ -47,7 +47,7 @@ export const logoutUser = (data: string) => async (dispatch: AppDispatch) => {
     delete axios.defaults.headers.common["Authorization"];
 };
 
-export const registerUser = (data: UserModel) => async (dispatch: AppDispatch) => {
+export const registerUser = (data: UserModel) => async (dispatch: AppDispatch):Promise<void> => {
     try {
         const response = await axios.post(`${requestPath}/`, data, { withCredentials: true });
         const user = setUserForLogin(response.data.userData);

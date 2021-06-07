@@ -4,7 +4,7 @@ import Routing from '../../components/Routing';
 import './Layout.css';
 
 
-function Layout({dark}:{dark: {isDarkMode: boolean, setIsDarkMode: Function}}) {
+const Layout = ({dark}:{dark: {isDarkMode: boolean, setIsDarkMode: Function}}):JSX.Element => {
     return (
         <div className="Layout">
             <header>

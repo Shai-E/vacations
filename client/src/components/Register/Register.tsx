@@ -7,7 +7,7 @@ import { registerUser } from "../../store/actions/usersActions";
 import axios from "axios";
 import { IRegister } from "../../interfaces/IRegister";
 
-const Register = () => {
+const Register = ():JSX.Element => {
     const dispatch = useDispatch();
     const {
         register,
@@ -21,7 +21,7 @@ const Register = () => {
     const [isUsernameTaken, setIsUsernameTaken] = useState(false);
 
     useEffect(() => {
-        const getAllUsernames = async () => {
+        const getAllUsernames = async ():Promise<void> => {
             try {
                 const { data } = await axios.get("http://localhost:5000/api/users/usernames");
                 setUsernames(data);
@@ -32,7 +32,7 @@ const Register = () => {
         getAllUsernames();
     }, []);
 
-    const submit = (data: IRegister) => {
+    const submit = (data: IRegister):void => {
         delete data.confirmPassword;
         dispatch(registerUser(data));
     };

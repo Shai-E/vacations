@@ -3,10 +3,10 @@ import Login from "../../components/Login/Login";
 import Register from "../../components/Register/Register";
 import "./GuestMenu.css";
 
-function GuestMenu() {
+const GuestMenu = ():JSX.Element => {
     const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 800);
 
-    const validateScreenSize = () => {
+    const validateScreenSize = ():void => {
         if (window.innerWidth < 800) {
             setIsScreenSmall(true);
         } else {
@@ -14,14 +14,14 @@ function GuestMenu() {
         }
     };
 
-    useEffect(() => {
+    useEffect((): ()=>void => {
         window.addEventListener("resize", validateScreenSize);
-        return () => {
+        return ():void => {
             window.removeEventListener("resize", validateScreenSize);
         };
     }, []);
 
-    useEffect(() => {
+    useEffect(():void => {
         if (!isScreenSmall) {
             const signUpButton = document.getElementById("signUp");
             const signInButton = document.getElementById("signIn");

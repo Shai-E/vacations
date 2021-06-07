@@ -13,7 +13,7 @@ import { VacationModel } from "../../models/VacationModel";
 import { RootState } from "../../store/store";
 import { UserModel } from "../../models/UserModel";
 
-function AddVacation() {
+const AddVacation = ():JSX.Element => {
     const user: UserModel = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
     const [isVacationUploaded, setIsVacationUploaded] = useState(false);
@@ -36,24 +36,24 @@ function AddVacation() {
     startDate.current = watch("startDate", "");
     endDate.current = watch("endDate", "");
 
-    const submitVacation = async (data: VacationModel) => {
+    const submitVacation = async (data: VacationModel): Promise<void> => {
         const id = await dispatch(postNewVacation(data));
         setVacationId(+id);
         setIsVacationUploaded(true);
     };
 
-    const submitPicture = () => {
+    const submitPicture = (): void => {
         dispatch(updatePictureForVacation(picToUpload!, vacationId!));
         routeChange("vacations");
     };
 
-    useEffect(()=>{
-        if(!user.isAdmin){
+    useEffect((): void => {
+        if (!user.isAdmin) {
             history.push("/page-404");
         }
-    },[user.isAdmin, history]);
+    }, [user.isAdmin, history]);
 
-    useEffect(() => {
+    useEffect((): void => {
         if (document.querySelector(`#new-picture-input`)) {
             const imgInput: HTMLInputElement = document.querySelector(`#new-picture-input`)!;
             const imgPreview: HTMLImageElement = document.querySelector(`#new-vacation-image`)!;
@@ -72,7 +72,7 @@ function AddVacation() {
         }
     }, [isVacationUploaded]);
 
-    useEffect(() => {
+    useEffect((): void => {
         const uploadButton = document.querySelector(`#new-upload-image-btn`);
         if (picToUpload) {
             uploadButton?.removeAttribute("disabled");

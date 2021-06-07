@@ -8,11 +8,12 @@ import { updateToken } from "./usersActions";
 import io from "socket.io-client";
 import { IFollow } from "../../interfaces/IFollow";
 import { IUpdateVacation } from "../../interfaces/IUpdateVacation";
+import { IFormattedVacationData } from "../../interfaces/IFormattedVacationData";
 const requestPath = "http://localhost:5000/api/vacations";
 
 const socket = io("http://localhost:5000");
 
-export const formatVacationsData = (data: { IDs: number[]; vacations: VacationModel[] }) => {
+export const formatVacationsData = (data: { IDs: number[]; vacations: VacationModel[] }): IFormattedVacationData => {
     let allVacations = data.vacations;
     const IDs = data.IDs;
     const vacationsFollowedByUser = allVacations.filter((vacation: VacationModel) => IDs.includes(vacation.id!));
@@ -27,34 +28,40 @@ export const formatVacationsData = (data: { IDs: number[]; vacations: VacationMo
     };
 };
 
-export const syncAllVacations = (data: VacationModel[]) => (dispatch: AppDispatch) => {
-    try {
-        dispatch(syncronizeVacation(data));
-    } catch (err) {
-        dispatch(displayMsg(err.response.data.message));
-        removeMessage(dispatch);
-    }
-};
+export const syncAllVacations =
+    (data: VacationModel[]) =>
+    (dispatch: AppDispatch): void => {
+        try {
+            dispatch(syncronizeVacation(data));
+        } catch (err) {
+            dispatch(displayMsg(err.response.data.message));
+            removeMessage(dispatch);
+        }
+    };
 
-export const getAllVacations = () => async (dispatch: AppDispatch) => {
+export const getAllVacations =
+    () =>
+    async (dispatch: AppDispatch): Promise<VacationModel[] | undefined> => {
+        try {
+            await updateToken();
+            const { data } = await axios.get(`${requestPath}/all/${store.getState().user.id}`, {
+                withCredentials: true,
+            });
+            const vacations = formatVacationsData(data);
+            localStorage.setItem("vacations", JSON.stringify(vacations));
+            dispatch(getAll(vacations));
+            socket.emit("data-client-changes", store.getState().user.id, JSON.stringify(vacations.vacations));
+            return vacations.vacations;
+        } catch (err) {
+            dispatch(displayMsg(err.response.data.message));
+            removeMessage(dispatch);
+        }
+    };
+
+export const postNewVacation = (vacation: VacationModel) => async (dispatch: AppDispatch): Promise<number | undefined> => {
     try {
         await updateToken();
-        const { data } = await axios.get(`${requestPath}/all/${store.getState().user.id}`, { withCredentials: true });
-        const vacations = formatVacationsData(data);
-        localStorage.setItem("vacations", JSON.stringify(vacations));
-        dispatch(getAll(vacations));
-        socket.emit("data-client-changes", store.getState().user.id, JSON.stringify(vacations.vacations));
-        return vacations.vacations;
-    } catch (err) {
-        dispatch(displayMsg(err.response.data.message));
-        removeMessage(dispatch);
-    }
-};
-
-export const postNewVacation = (vacation: VacationModel) => async (dispatch: AppDispatch) => {
-    try {
-        await updateToken();
-        const { data } = await axios.post(`${requestPath}/add`, vacation, {
+        const { data }:{data:{message:string; vacationId: number}} = await axios.post(`${requestPath}/add`, vacation, {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
         });
@@ -68,7 +75,7 @@ export const postNewVacation = (vacation: VacationModel) => async (dispatch: App
     }
 };
 
-export const updatePictureForVacation = (data: File, id: number) => async (dispatch: AppDispatch) => {
+export const updatePictureForVacation = (data: File, id: number) => async (dispatch: AppDispatch):Promise<void> => {
     try {
         await updateToken();
         const fd = new FormData();
@@ -78,8 +85,6 @@ export const updatePictureForVacation = (data: File, id: number) => async (dispa
         });
         dispatch(displayMsg(response.data.message));
         removeMessage(dispatch);
-        // dispatch(setCurrVacationId(0));
-
         const vacations = formatVacationsData(response.data);
         localStorage.setItem("vacations", JSON.stringify(vacations));
         dispatch(getAll(vacations));
@@ -89,7 +94,7 @@ export const updatePictureForVacation = (data: File, id: number) => async (dispa
     }
 };
 
-export const postVacationUpdate = (data: IUpdateVacation) => async (dispatch: AppDispatch) => {
+export const postVacationUpdate = (data: IUpdateVacation) => async (dispatch: AppDispatch):Promise<void> => {
     try {
         await updateToken();
         const response = await axios.post(`${requestPath}/update/${data.vacationId}`, data.vacation, {
@@ -105,7 +110,7 @@ export const postVacationUpdate = (data: IUpdateVacation) => async (dispatch: Ap
     }
 };
 
-export const deleteVacation = (vacationId: number) => async (dispatch: AppDispatch) => {
+export const deleteVacation = (vacationId: number) => async (dispatch: AppDispatch):Promise<void> => {
     try {
         await updateToken();
         const { data } = await axios.delete(`${requestPath}/${vacationId}`, {
@@ -124,7 +129,7 @@ export const deleteVacation = (vacationId: number) => async (dispatch: AppDispat
     }
 };
 
-export const postNewFollower = (data: IFollow) => async (dispatch: AppDispatch) => {
+export const postNewFollower = (data: IFollow) => async (dispatch: AppDispatch):Promise<void> => {
     try {
         await updateToken();
         const response = await axios.post(`${requestPath}/follow/${data.userId}/${data.vacationId}`, null, {
@@ -141,7 +146,7 @@ export const postNewFollower = (data: IFollow) => async (dispatch: AppDispatch) 
     }
 };
 
-export const removeFollower = (data: IFollow) => async (dispatch: AppDispatch) => {
+export const removeFollower = (data: IFollow) => async (dispatch: AppDispatch):Promise<void> => {
     try {
         await updateToken();
         const response = await axios.delete(`${requestPath}/unfollow/${data.userId}/${data.vacationId}`, {

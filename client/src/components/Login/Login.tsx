@@ -4,14 +4,14 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/actions/usersActions";
 import { UserModel } from "../../models/UserModel";
 
-const Login = () => {
+const Login = ():JSX.Element => {
     const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const submit = (data: UserModel) => {
+    const submit = (data: UserModel): void => {
         dispatch(loginUser(data));
     };
     return (

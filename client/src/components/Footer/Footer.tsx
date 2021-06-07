@@ -1,6 +1,6 @@
 import './Footer.css';
 
-function Footer() {
+const Footer = ():JSX.Element => {
     return (
         <footer>
             <span>Created by Shai Eliav</span>

@@ -22,7 +22,7 @@ import { RootState } from "../../store/store";
 import { IFollow } from "../../interfaces/IFollow";
 import { IUpdateVacation } from "../../interfaces/IUpdateVacation";
 
-function Vacation({ vacation, isFollowedInit }: { vacation: VacationModel; isFollowedInit: boolean }) {
+const Vacation = ({ vacation, isFollowedInit }: { vacation: VacationModel; isFollowedInit: boolean }):JSX.Element => {
     const user = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
 
@@ -47,7 +47,7 @@ function Vacation({ vacation, isFollowedInit }: { vacation: VacationModel; isFol
     destination.current = watch("destination", "");
     price.current = watch("price", "");
 
-    const submitVacation = (data: VacationModel) => {
+    const submitVacation = (data: VacationModel):void => {
         const objToSens: IUpdateVacation = {
             vacation: data,
             vacationId: +vacation.id!,
@@ -56,11 +56,11 @@ function Vacation({ vacation, isFollowedInit }: { vacation: VacationModel; isFol
         dispatch(() => dispatch(getAllVacations()));
     };
 
-    const submitPicture = () => {
+    const submitPicture = ():void => {
         dispatch(() => dispatch(updatePictureForVacation(picToUpload!, vacation.id!)));
     };
 
-    useEffect(() => {
+    useEffect(():void => {
         const doesVacationExist = document.querySelector(`#edit${vacation.id}`) !== null;
         if (doesVacationExist) {
             const editBtn: HTMLInputElement = document.querySelector(`#edit${vacation.id}`)!;
@@ -103,7 +103,7 @@ function Vacation({ vacation, isFollowedInit }: { vacation: VacationModel; isFol
         }
     }, [dispatch, isFollowedInit, vacation.id, user]);
 
-    useEffect(() => {
+    useEffect(():void => {
         if (document.querySelector(`#picture-input-${vacation.id}`)) {
             const imgInput: HTMLInputElement = document.querySelector(`#picture-input-${vacation.id}`)!;
             const imgPreview: HTMLImageElement = document.querySelector(`#vacation-image-${vacation.id}`)!;

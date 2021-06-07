@@ -10,13 +10,13 @@ import { RootState } from "./store/store";
 
 const socket = io("http://localhost:5000");
 
-function App() {
+const App=():JSX.Element => {
     const user: UserModel = useSelector((state: RootState) => state.user);
     const message: string = useSelector((state: RootState) => state.message);
     const dispatch = useDispatch();
     const [isDarkMode, setIsDarkMode] = useState(JSON.parse(`${localStorage.getItem("dark")}`) || false);
 
-    useEffect(() => {
+    useEffect((): void => {
         if (user.isLoggedIn) dispatch(getAllVacations());
         socket.on("data-remote-changes", (userId: string, ops: string) => {
             if (user.id !== +userId) {
@@ -27,7 +27,7 @@ function App() {
 
     //
 
-    useEffect(() => {
+    useEffect(():void => {
         if(localStorage.getItem("dark")) {
             const initDarkToggel = JSON.parse(`${localStorage.getItem("dark")}`)
             const darkCheckbox: HTMLInputElement = document.querySelector("#dark-toggle")!;

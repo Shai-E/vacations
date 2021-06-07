@@ -10,10 +10,10 @@ import Brightness from "@material-ui/icons/Brightness4";
 import { useEffect } from "react";
 import { RootState } from "../../store/store";
 
-function NavBar({ dark }: { dark: { isDarkMode: boolean; setIsDarkMode: Function } }) {
+const NavBar = ({ dark }: { dark: { isDarkMode: boolean; setIsDarkMode: Function } }):JSX.Element => {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
-    useEffect(() => {
+    useEffect(():void => {
         const darkCheckbox: HTMLInputElement = document.querySelector("#dark-toggle")!;
         darkCheckbox.checked = dark.isDarkMode;
     }, [dark.isDarkMode]);

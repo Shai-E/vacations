@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useHistory } from "react-router";
 import "./Page404.css";
 
-function Page404() {
+const Page404 = ():JSX.Element => {
     const history = useHistory();
 
-    useEffect(() => {
+    useEffect(():void => {
         setTimeout(() => {
             history.push("/");
         }, 3000);

@@ -9,7 +9,7 @@ import { RootState } from "../../store/store";
 import { UserModel } from "../../models/UserModel";
 import { useHistory } from "react-router-dom";
 
-const Reports = () => {
+const Reports = ():JSX.Element => {
     const [data, setData] = useState([]);
     const [labels, setLabels] = useState();
     const [options, setOptions] = useState({});
@@ -20,13 +20,13 @@ const Reports = () => {
     const vacations = useSelector((state: RootState) => state.vacations.vacations);
     const user:UserModel = useSelector((state: RootState) => state.user);
 
-    useEffect(()=>{
+    useEffect(():void=>{
         if(!user.isAdmin){
             history.push("/page-404");
         }
     },[user.isAdmin, history]);
 
-    useEffect(() => {
+    useEffect(():void => {
         const followedVacationsData = vacations
             .filter((v: VacationModel) => v.followers! > 0)
             .map((v: VacationModel) => {
@@ -78,7 +78,7 @@ const Reports = () => {
         setOptions(optionsInit);
     }, [vacations]);
 
-    useEffect(() => {
+    useEffect(():void => {
         if (data) {
             const chartDataInit = {
                 labels: labels,

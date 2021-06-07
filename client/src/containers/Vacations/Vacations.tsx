@@ -7,13 +7,13 @@ import Loader from "../../components/Loader/Loader";
 import { VacationModel } from "../../models/VacationModel";
 import { RootState } from "../../store/store";
 
-function Vacations() {
+const Vacations = ():JSX.Element => {
     const vacations = useSelector((state: RootState) => state.vacations);
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        (async () => {
+    useEffect(():void => {
+        (async ():Promise<void> => {
             await dispatch(() => dispatch(getAllVacations()));
             setLoading(false);
         })();
