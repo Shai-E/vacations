@@ -6,8 +6,8 @@ const port = process.env.PORT || 5000;
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const verifyToken = require("./middlewares/vt");
-const vacationsController = require("./controllers/vacationsController");
-const usersController = require("./controllers/usersController");
+const vacationsController = require("./routes/vacations");
+const usersController = require("./routes/users");
 
 app.use(cookieParser());
 app.use(

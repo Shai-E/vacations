@@ -1,4 +1,4 @@
-const dal = require("../dal/dal");
+const {execute, executeWithParams} = require("../data-access/dal");
 
 const getVacations = async () => {
     try{
@@ -9,7 +9,7 @@ const getVacations = async () => {
             LEFT JOIN users
             ON followers.user_id = users.id
             GROUP BY id ORDER BY start_date ASC;`;
-        return await dal.execute(sql);
+        return await execute(sql);
     }catch(err){
         console.log(err)
     }
@@ -19,7 +19,7 @@ const getFollowedVacationsIDsByUserId = async (userId) => {
     try{
         const id = userId;
         const sql = `SELECT vacation_id as vacations FROM followers where user_id = ?;`;
-        const vacations = await dal.executeWithParams(sql, [id]);
+        const vacations = await executeWithParams(sql, [id]);
         let IDs = [];
         for (let vacation of vacations) {
             for (let key in vacation) {

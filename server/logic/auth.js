@@ -1,12 +1,12 @@
 require("dotenv").config();
-const dal = require("../dal/dal");
+const {execute, executeWithParams} = require("../data-access/dal");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const getAllUsernames = async (req, res, next) => {
     try{
         const sql = `SELECT username FROM users`;
-        const result = await dal.execute(sql);
+        const result = await execute(sql);
         let usernames = [];
         for (let username of result) {
             for (let key in username) {
@@ -24,7 +24,7 @@ const getUserById = async (req, res, next) => {
     try {
         const id = req.body.id;
         const sql = `SELECT users.id, username, first_name AS firstName, last_name AS lastName, password, is_admin AS isAdmin FROM users WHERE id = ${id}`;
-        const user = await dal.execute(sql);
+        const user = await execute(sql);
         return res.json(user);
     } catch (err) {
         err.code = 500;
@@ -43,7 +43,7 @@ const genRefreshToken = (user) => {
 const getUserByUsername = async (userInfo) => {
     const { username } = userInfo;
     const sql = `SELECT users.id, username, first_name AS firstName, last_name AS lastName, password, is_admin AS isAdmin FROM users WHERE username = ?`;
-    const [user] = await dal.executeWithParams(sql, [username]);
+    const [user] = await executeWithParams(sql, [username]);
     return user;
 };
 
@@ -52,7 +52,7 @@ const saveRefreshToken = async (token, userId) => {
     const sql = `INSERT INTO tokens(token, user_id)
         VALUES(?,?)`;
         const parameters = [token, userId];
-        return await dal.executeWithParams(sql, parameters);
+        return await executeWithParams(sql, parameters);
     } catch (err) {
         return res.status(500).send(err);
     }
@@ -111,7 +111,7 @@ const register = async (req, res, next) => {
         const parameters = [firstName, lastName, username, hashedPassword, admin];
         const sql = `INSERT INTO users(first_name, last_name, username, password, is_admin)
         VALUES(?,?,?,?,?)`;
-        const info = await dal.executeWithParams(sql, parameters);
+        const info = await executeWithParams(sql, parameters);
         const id = info.insertId;
         const userData = await setUserWithTokens({ firstName, lastName, username, isAdmin, id }, res);
         return res.json({ userData, message: `Registered successfully as ${userData.username}!` });
@@ -129,7 +129,7 @@ const refresh = async (req, res, next) => {
             return next(err);
         };
         const tokenSql = `SELECT * FROM tokens WHERE token = ?`;
-        const isRefreshTokenExist = await dal.executeWithParams(tokenSql, [refreshToken]);
+        const isRefreshTokenExist = await executeWithParams(tokenSql, [refreshToken]);
         if (isRefreshTokenExist.length === 0) {
             const err = {code: 403, message: "couldn't verify token"};
             return next(err);
@@ -156,7 +156,7 @@ const revokeRefreshTokensForUser = async (req, res, next) => {
     try {
         const id = +req.params.id;
         const sql = `DELETE FROM tokens WHERE user_id = ?`;
-        const result = await dal.executeWithParams(sql, [id]);
+        const result = await executeWithParams(sql, [id]);
         res.status(200).json(result)
     } catch (err) {
         err.code = 500;
@@ -170,7 +170,7 @@ const logout = async (req, res, next) => {
         const token = req.cookies.jid;
         res.clearCookie("jid");
         if (!token) return;
-        await dal.executeWithParams(sql, [token]);
+        await executeWithParams(sql, [token]);
         return res.json({ message: "User is logged out" });
     } catch (err) {
         err.code = 500;
