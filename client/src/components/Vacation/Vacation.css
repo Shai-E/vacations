@@ -44,6 +44,7 @@
     margin: 0;
     margin-left: 30px;
     width: 100%;
+    font-size: .8rem;
 }
 
 .dark .vacation-text {
@@ -175,7 +176,6 @@
 
 .edit-input:checked ~ .edit-btn:before {
     content: "SAVE ✔";
-    /* outline: 1px solid black; */
 }
 
 .edit-input ~ .edit-btn {
@@ -209,11 +209,6 @@
     color: #ffffff;
     background-color: #6893da;
 }
-
-/* .edit-input:checked ~ .edit-btn {
-    color: #6f7886;
-    background-color: #6894da50;
-} */
 
 .edit-input:checked ~ .edit-btn:hover {
     color: #000;
