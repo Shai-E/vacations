@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./Vacation.css";
 import vacaPH from "../../assets/images/vacation-placeholder.jpg";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,13 +16,17 @@ import {
     removeFollower,
     updatePictureForVacation,
 } from "../../store/actions/vacationsActions";
-import { useRef } from "react";
 import { VacationModel } from "../../models/VacationModel";
 import { RootState } from "../../store/store";
 import { IFollow } from "../../interfaces/IFollow";
 import { IUpdateVacation } from "../../interfaces/IUpdateVacation";
 
-const Vacation = ({ vacation, isFollowedInit }: { vacation: VacationModel; isFollowedInit: boolean }):JSX.Element => {
+interface Props {
+    vacation: VacationModel;
+    isFollowedInit: boolean
+}
+
+const Vacation:React.FC<Props> = ({ vacation, isFollowedInit }):JSX.Element => {
     const user = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
 

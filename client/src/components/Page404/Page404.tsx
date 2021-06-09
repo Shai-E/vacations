@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import "./Page404.css";
 
-const Page404 = ():JSX.Element => {
+const Page404: React.FC = (): JSX.Element => {
     const history = useHistory();
 
-    useEffect(():void => {
+    useEffect((): void => {
         setTimeout(() => {
             history.push("/");
         }, 3000);
@@ -17,6 +17,6 @@ const Page404 = ():JSX.Element => {
             <p>You'll be redirected to our home page.</p>
         </div>
     );
-}
+};
 
 export default Page404;

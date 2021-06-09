@@ -1,10 +1,11 @@
+import React from 'react';
 import "./Login.css";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/actions/usersActions";
 import { UserModel } from "../../models/UserModel";
 
-const Login = ():JSX.Element => {
+const Login:React.FC = ():JSX.Element => {
     const dispatch = useDispatch();
     const {
         register,

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Register.css";
 
 import { useForm } from "react-hook-form";
@@ -7,7 +7,7 @@ import { registerUser } from "../../store/actions/usersActions";
 import axios from "axios";
 import { IRegister } from "../../interfaces/IRegister";
 
-const Register = ():JSX.Element => {
+const Register: React.FC = (): JSX.Element => {
     const dispatch = useDispatch();
     const {
         register,
@@ -21,7 +21,7 @@ const Register = ():JSX.Element => {
     const [isUsernameTaken, setIsUsernameTaken] = useState(false);
 
     useEffect(() => {
-        const getAllUsernames = async ():Promise<void> => {
+        const getAllUsernames = async (): Promise<void> => {
             try {
                 const { data } = await axios.get("http://localhost:5000/api/users/usernames");
                 setUsernames(data);
@@ -32,7 +32,7 @@ const Register = ():JSX.Element => {
         getAllUsernames();
     }, []);
 
-    const submit = (data: IRegister):void => {
+    const submit = (data: IRegister): void => {
         delete data.confirmPassword;
         dispatch(registerUser(data));
     };

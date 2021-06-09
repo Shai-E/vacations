@@ -7,10 +7,14 @@ import FlightIcon from "@material-ui/icons/Flight";
 import ExitToApp from "@material-ui/icons/ExitToApp";
 import NightsStay from "@material-ui/icons/NightsStay";
 import Brightness from "@material-ui/icons/Brightness4";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { RootState } from "../../store/store";
 
-const NavBar = ({ dark }: { dark: { isDarkMode: boolean; setIsDarkMode: Function } }):JSX.Element => {
+interface Props {
+    dark: { isDarkMode: boolean; setIsDarkMode: Function }
+}
+
+const NavBar:React.FC<Props> = ({ dark }):JSX.Element => {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
     useEffect(():void => {

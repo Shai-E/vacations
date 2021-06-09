@@ -1,10 +1,11 @@
+import React from 'react';
 import { Redirect, Route, Switch } from "react-router-dom";
 import Vacations from "../containers/Vacations/Vacations";
 import Page404 from "./Page404/Page404";
 import AddVacation from "./AddVacation/AddVacation";
 import Reports from "./Reports/Reports";
 
-const Routing = ():JSX.Element => {
+const Routing:React.FC = ():JSX.Element => {
     return (
         <>
             <Switch>

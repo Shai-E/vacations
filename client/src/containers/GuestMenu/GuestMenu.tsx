@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "../../components/Login/Login";
 import Register from "../../components/Register/Register";
 import "./GuestMenu.css";
 
-const GuestMenu = ():JSX.Element => {
+const GuestMenu:React.FC = ():JSX.Element => {
     const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 800);
 
     const validateScreenSize = ():void => {

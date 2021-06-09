@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Reports.css";
 import { Bar } from "react-chartjs-2";
 import { useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import { RootState } from "../../store/store";
 import { UserModel } from "../../models/UserModel";
 import { useHistory } from "react-router-dom";
 
-const Reports = ():JSX.Element => {
+const Reports: React.FC = (): JSX.Element => {
     const [data, setData] = useState([]);
     const [labels, setLabels] = useState();
     const [options, setOptions] = useState({});
@@ -18,22 +18,22 @@ const Reports = ():JSX.Element => {
     const history = useHistory();
 
     const vacations = useSelector((state: RootState) => state.vacations.vacations);
-    const user:UserModel = useSelector((state: RootState) => state.user);
+    const user: UserModel = useSelector((state: RootState) => state.user);
 
-    useEffect(():void=>{
-        if(!user.isAdmin){
+    useEffect((): void => {
+        if (!user.isAdmin) {
             history.push("/page-404");
         }
-    },[user.isAdmin, history]);
+    }, [user.isAdmin, history]);
 
-    useEffect(():void => {
+    useEffect((): void => {
         const followedVacationsData = vacations
             .filter((v: VacationModel) => v.followers! > 0)
             .map((v: VacationModel) => {
                 return { x: `${v.destination} ${moment(v.startDate).format("DD/MM/YYYY")}`, y: v.followers };
             });
         setData(followedVacationsData);
-        const labelsData = followedVacationsData.map((v: {x: string, y: number}) => v["x"]);
+        const labelsData = followedVacationsData.map((v: { x: string; y: number }) => v["x"]);
         setLabels(labelsData);
         const optionsInit = {
             plugins: {
@@ -48,7 +48,6 @@ const Reports = ():JSX.Element => {
                 legend: {
                     display: false,
                 },
-                
             },
             responsive: true,
             maintainAspectRatio: false,
@@ -78,7 +77,7 @@ const Reports = ():JSX.Element => {
         setOptions(optionsInit);
     }, [vacations]);
 
-    useEffect(():void => {
+    useEffect((): void => {
         if (data) {
             const chartDataInit = {
                 labels: labels,

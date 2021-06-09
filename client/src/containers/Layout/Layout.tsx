@@ -1,10 +1,13 @@
+import React from 'react';
 import Footer from '../../components/Footer/Footer';
 import NavBar from '../../components/NavBar/NavBar';
 import Routing from '../../components/Routing';
 import './Layout.css';
 
-
-const Layout = ({dark}:{dark: {isDarkMode: boolean, setIsDarkMode: Function}}):JSX.Element => {
+interface Props {
+    dark: {isDarkMode: boolean, setIsDarkMode: Function}
+}
+const Layout:React.FC<Props> = ({dark}):JSX.Element => {
     return (
         <div className="Layout">
             <header>

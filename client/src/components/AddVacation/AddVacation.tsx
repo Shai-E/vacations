@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postNewVacation, updatePictureForVacation } from "../../store/actions/vacationsActions";
 import ImageIcon from "@material-ui/icons/Image";
@@ -13,7 +13,7 @@ import { VacationModel } from "../../models/VacationModel";
 import { RootState } from "../../store/store";
 import { UserModel } from "../../models/UserModel";
 
-const AddVacation = ():JSX.Element => {
+const AddVacation: React.FC = ():JSX.Element => {
     const user: UserModel = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
     const [isVacationUploaded, setIsVacationUploaded] = useState(false);
